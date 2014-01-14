@@ -1,17 +1,19 @@
 Summary:	Utilities for mounting and managing CIFS mounts
 Name:		cifs-utils
-Version:	6.2
+Version:	6.3
 Release:	1
 License:	GPL v3+
 Group:		Daemons
 Source0:	ftp://ftp.samba.org/pub/linux-cifs/cifs-utils/%{name}-%{version}.tar.bz2
-# Source0-md5:	6a83fe19e02266cb468ea3bf1cc0d007
+# Source0-md5:	93697dbc043cb4d5c66e15e281f872e5
 URL:		http://linux-cifs.samba.org/cifs-utils/
 BuildRequires:	keyutils-devel
 BuildRequires:	libcap-ng-devel
 BuildRequires:	libsmbclient-devel
 BuildRequires:	talloc-devel
+BuildRequires:  pam-devel
 Requires:	keyutils
+Suggests:	pam
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -26,8 +28,9 @@ standard Linux file system.
 %setup -q
 
 %build
-export ROOTSBINDIR=%{_sbindir}
-%configure
+ROOTSBINDIR=%{_sbindir} \
+%configure \
+	--enable-systemd
 %{__make}
 
 %install
@@ -47,6 +50,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/setcifsacl
 %attr(755,root,root) %{_sbindir}/cifs.idmap
 %attr(755,root,root) %{_sbindir}/mount.cifs
+
+%attr(755,root,root) %{_libdir}/security/pam_cifscreds.so
 
 %dir %{_libdir}/cifs-utils
 %attr(755,root,root) %{_libdir}/cifs-utils/idmapwb.so
