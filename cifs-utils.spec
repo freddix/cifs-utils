@@ -1,11 +1,11 @@
 Summary:	Utilities for mounting and managing CIFS mounts
 Name:		cifs-utils
-Version:	6.3
+Version:	6.4
 Release:	1
 License:	GPL v3+
 Group:		Daemons
 Source0:	ftp://ftp.samba.org/pub/linux-cifs/cifs-utils/%{name}-%{version}.tar.bz2
-# Source0-md5:	93697dbc043cb4d5c66e15e281f872e5
+# Source0-md5:	b7d75b67fd3987952896d27256c7293d
 URL:		http://linux-cifs.samba.org/cifs-utils/
 BuildRequires:	keyutils-devel
 BuildRequires:	libcap-ng-devel
